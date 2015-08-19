@@ -50,13 +50,21 @@ describe(Author) do
 
   describe('.find') do
     it('find an author by its id') do
-      author1=Author.new({:id => nil, :first_name => "Francois", :last_name => "Gilot"})
+      author1 = Author.new({:id => nil, :first_name => "Francois", :last_name => "Gilot"})
       author1.save()
-      author2=Author.new({:id => nil, :first_name => "Haruki", :last_name => "Murakami"})
+      author2 = Author.new({:id => nil, :first_name => "Haruki", :last_name => "Murakami"})
       author2.save()
       expect(Author.find(author1.id())).to(eq(author1))
     end
   end
 
-
+  describe('#update') do
+    it('allows a user to update information in the authors table') do
+      author = Author.new({:id => nil, :first_name => "Francois", :last_name => "Gilot"})
+      author.save()
+      author.update({:first_name => "Frank"})
+      expect(author.first_name()).to(eq("Frank"))
+    end
+  end
+  
 end

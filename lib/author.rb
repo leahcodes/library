@@ -39,6 +39,9 @@ class Author
     found_author
   end
 
-
-
+  define_method(:update) do |attributes|
+    @first_name = attributes.fetch(:first_name)
+    @id = self.id()
+    DB.exec("UPDATE authors SET first_name '#{@first_name}' WHERE id = #{@id};")
+  end
 end
