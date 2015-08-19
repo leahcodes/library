@@ -20,6 +20,6 @@ post('/books/new') do
   subject = params.fetch("subject")
   book = Book.new({:title => title, :subject => subject})
   book.save()
-  @books = Book.all()
+  @books = Book.all() 
   erb(:books)
 end
