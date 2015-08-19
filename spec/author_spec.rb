@@ -8,7 +8,21 @@ describe(Author) do
     end
   end
 
+  describe('#==') do
+    it("is equal if they have the same name") do
+      author1=Author.new({:id => nil, :first_name => "Francois", :last_name => "Gilot"})
+      author2=Author.new({:id => nil, :first_name => "Francois", :last_name => "Gilot"})
+      expect(author1).to(eq(author2))
+    end
+  end
 
+  describe('#save') do
+    it('saves author to authors array') do
+      author = Author.new({:id => nil, :first_name => "Francois", :last_name => "Gilot"})
+      author.save()
+      expect(Author.all()).to(eq([author]))
+    end
+  end
 
 
 #   describe('#id') do
