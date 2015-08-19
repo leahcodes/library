@@ -66,5 +66,16 @@ describe(Author) do
       expect(author.first_name()).to(eq("Frank"))
     end
   end
-  
+
+  describe('#delete') do
+    it('removes an author from the table') do
+      author1 = Author.new({:id => nil, :first_name => "Francois", :last_name => "Gilot"})
+      author1.save()
+      author2 = Author.new({:id => nil, :first_name => "Haruki", :last_name => "Murakami"})
+      author2.save()
+      author2.delete()
+      expect(Author.all()).to(eq([author1]))
+    end
+  end
+
 end

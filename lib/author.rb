@@ -42,6 +42,10 @@ class Author
   define_method(:update) do |attributes|
     @first_name = attributes.fetch(:first_name)
     @id = self.id()
-    DB.exec("UPDATE authors SET first_name '#{@first_name}' WHERE id = #{@id};")
+    DB.exec("UPDATE authors SET first_name = '#{@first_name}' WHERE id = #{@id};")
+  end
+
+  define_method(:delete) do
+    DB.exec("DELETE FROM authors WHERE id = #{self.id()};")
   end
 end
