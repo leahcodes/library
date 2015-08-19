@@ -24,12 +24,27 @@ describe(Author) do
     end
   end
 
+  describe('#id') do
+    it("sets the ID when the author is saved") do
+      author = Author.new({:id => nil, :first_name => "Francois", :last_name => "Gilot"})
+      author.save()
+      expect(author.id()).to(be_an_instance_of(Fixnum))
+    end
+  end
 
-#   describe('#id') do
-#     it("sets the ID when the author is saved") do
-#       author = Author.new({:id => nil, :first_name => "Francois", :last_name => "Gilot"})
-#       author.save()
-#       expect(author.id()).to(be_an_instance_of(Fixnum))
-#     end
-#   end
+  describe('#first_name') do
+    it('returns the first name of the author') do
+      author = Author.new({:id => nil, :first_name => "Francois", :last_name => "Gilot"})
+      author.save()
+      expect(author.first_name()).to(eq("Francois"))
+    end
+  end
+
+  describe('#last_name') do
+    it('returns the last name of the author') do
+      author = Author.new({:id => nil, :first_name => "Francois", :last_name => "Gilot"})
+      author.save()
+      expect(author.last_name()).to(eq("Gilot"))
+    end
+  end
 end
