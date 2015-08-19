@@ -1,0 +1,58 @@
+<h1>Add a Book</h1>
+
+<form action="/books/new" method="post">
+
+  <div class="form-group">
+
+    <label class="form-label" for="title">Title</label>
+    <input id="title" name="title" type="text" class="form-control">
+
+    <label class="form-label" for="subject">Subject</label>
+    <input id="subject" name="subject" type="text" class="form-control">
+
+    <button name="submit" class="btn">Add</button>
+
+  </div>
+</form>
+
+<h1>Search Books:</h1>
+
+<form action="/books/by_title" method="post">
+
+  <div class="form-group">
+
+    <label class="form-label" for="title">Title</label>
+    <input id="title" name="title" type="text" class="form-control">
+
+    <button name="submit" class="btn">Search</button>
+
+  </div>
+</form>
+
+<h5> --OR-- </h5>
+
+<form action="/books/by_author" method="post">
+
+  <div class="form-group">
+
+    <label class="form-label" for="author">Author</label>
+    <input id="author" name="author" type="text" class="form-control">
+
+    <button name="submit" class="btn">Search</button>
+
+  </div>
+</form>
+
+<h5> --OR-- </h5>
+
+<form action="/books/by_subject" method="post">
+
+  <div class="form-group">
+
+    <label class="form-label" for="subject">Subject</label>
+    <input id="subject" name="subject" type="text" class="form-control">
+
+    <button name="submit" class="btn">Search</button>
+
+  </div>
+</form>
