@@ -47,4 +47,16 @@ describe(Author) do
       expect(author.last_name()).to(eq("Gilot"))
     end
   end
+
+  describe('.find') do
+    it('find an author by its id') do
+      author1=Author.new({:id => nil, :first_name => "Francois", :last_name => "Gilot"})
+      author1.save()
+      author2=Author.new({:id => nil, :first_name => "Haruki", :last_name => "Murakami"})
+      author2.save()
+      expect(Author.find(author1.id())).to(eq(author1))
+    end
+  end
+
+
 end
