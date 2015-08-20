@@ -48,10 +48,6 @@ class Book
     end
   end
 
-  define_method(:delete) do
-    DB.exec("DELETE FROM books WHERE id = #{self.id()};")
-  end
-
   define_method(:authors) do
     book_authors = []
     results = DB.exec("SELECT author_id FROM authors_books WHERE book_id = #{self.id()};")
@@ -63,5 +59,10 @@ class Book
       book_authors.push(Author.new({:first_name => first_name, :last_name => last_name, :id => author_id}))
     end
     book_authors
+  end
+
+  define_method(:delete) do
+    DB.exec("DELETE FROM authors_books WHERE book_id = #{self.id()};")
+    DB.exec("DELETE FROM books WHERE id = #{self.id()};")
   end
 end
