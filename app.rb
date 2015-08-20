@@ -15,6 +15,16 @@ get('/librarian') do
   erb(:librarian)
 end
 
+get('/books') do
+  @books = Book.all()
+  erb(:books)
+end
+
+post('/books') do
+  @books = Book.all()
+  erb(:books)
+end
+
 post('/books/new') do
   title = params.fetch("title")
   subject = params.fetch("subject")
@@ -22,4 +32,53 @@ post('/books/new') do
   book.save()
   @books = Book.all()
   erb(:books)
+end
+
+get('/authors') do
+  @authors = Author.all()
+  erb(:authors)
+end
+
+post('/authors') do
+  @authors = Author.all()
+  erb(:authors)
+end
+
+post('/authors/new') do
+  author_first = params.fetch("author_first")
+  author_last = params.fetch("author_last")
+  author = Author.new({:id => nil, :first_name => author_first, :last_name => author_last})
+  author.save()
+  @authors = Author.all()
+  erb(:authors)
+end
+
+get('/authors/:id') do
+  @author = Author.find(params.fetch("id").to_i())
+  @books = Book.all()
+  erb(:author_info)
+end
+
+get('/books/:id') do
+  @book = Book.find(params.fetch("id").to_i())
+  @authors = Author.all()
+  erb(:book_info)
+end
+
+patch("/authors/:id") do
+  author_id = params.fetch("id").to_i()
+  @author = Author.find(author_id)
+  book_ids = params.fetch("book_ids")
+  @author.update({:book_ids => book_ids})
+  @books = Book.all()
+  erb(:author_info)
+end
+
+patch("/books/:id") do
+  book_id = params.fetch("id").to_i()
+  @book = Book.find(book_id)
+  author_ids = params.fetch("author_ids")
+  @book.update({:author_ids => author_ids})
+  @authors = Author.all()
+  erb(:book_info)
 end

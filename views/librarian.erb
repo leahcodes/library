@@ -1,3 +1,17 @@
+<form action="/books" method="post">
+
+  <div class="form-group">
+    <button name="submit" class="btn btn-info">See all books</button>
+  </div>
+</form>
+
+<form action="/authors" method="post">
+
+  <div class="form-group">
+    <button name="submit" class="btn btn-info">See all Authors</button>
+  </div>
+</form>
+
 <h1>Add a Book</h1>
 
 <form action="/books/new" method="post">
@@ -10,49 +24,25 @@
     <label class="form-label" for="subject">Subject</label>
     <input id="subject" name="subject" type="text" class="form-control">
 
-    <button name="submit" class="btn">Add</button>
+    <button name="submit" class="btn btn-info btn-block">Add</button>
 
   </div>
 </form>
 
-<h1>Search Books:</h1>
 
-<form action="/books/by_title" method="post">
+<h1>Add an Author</h1>
 
-  <div class="form-group">
-
-    <label class="form-label" for="title">Title</label>
-    <input id="title" name="title" type="text" class="form-control">
-
-    <button name="submit" class="btn">Search</button>
-
-  </div>
-</form>
-
-<h5> --OR-- </h5>
-
-<form action="/books/by_author" method="post">
+<form action="/authors/new" method="post">
 
   <div class="form-group">
 
-    <label class="form-label" for="author">Author</label>
-    <input id="author" name="author" type="text" class="form-control">
+<label class="form-label" for="author_first">First</label>
+<input id="author_first" name="author_first" type="text" class="form-control">
 
-    <button name="submit" class="btn">Search</button>
+<label class="form-label" for="author_last">Last</label>
+<input id="author_last" name="author_last" type="text" class="form-control">
 
-  </div>
-</form>
+<button name="submit" class="btn btn-info btn-block">Add</button>
 
-<h5> --OR-- </h5>
-
-<form action="/books/by_subject" method="post">
-
-  <div class="form-group">
-
-    <label class="form-label" for="subject">Subject</label>
-    <input id="subject" name="subject" type="text" class="form-control">
-
-    <button name="submit" class="btn">Search</button>
-
-  </div>
+</div>
 </form>

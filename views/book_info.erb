@@ -1,0 +1,34 @@
+<h1><%= @book.title() %></h1>
+
+
+<% if @book.authors().any?() %>
+
+  <h3>This book's authors:</h3>
+
+  <ul>
+    <% @book.authors().each() do |author| %>
+      <li><a href="/authors/<%= author.id() %>"><%= author.first_name() %> <%= author.last_name() %></a></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are no authors yet! <a href="/authors">Add authors here</a></p>
+<% end %>
+
+<h3>Select all authors of this book:</h3>
+
+<% if @authors.any?() %>
+  <form action="/books/<%= @book.id %>" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <% @authors.each() do |author| %>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="author_ids[]" value="<%= author.id() %>"><%= author.first_name() %> <%= author.last_name() %>
+        </label>
+      </div>
+    <% end %>
+
+    <button type="submit">Add authors</button>
+  </form>
+<% end %>
+
+<a href="/">Return to Main Page</a>

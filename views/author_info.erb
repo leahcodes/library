@@ -1,0 +1,35 @@
+<h1><%= @author.first_name()%> <%=@author.last_name() %></h1>
+
+<% if @author.books().any?() %>
+
+  <h3>Here are all the books by this author:</h3>
+
+  <ul>
+    <% @author.books().each() do |book| %>
+      <li><a href="/books/<%= book.id() %>"><%= book.title() %></a></li>
+    <% end %>
+  </ul>
+
+  <h4>Add more books for this author:</h4>
+
+<% else %>
+  <h4>There are no books yet! Add books for this author:</h4>
+<% end %>
+
+<% if @books.any?() %>
+  <form action = "/authors/<%= @author.id %>" method="post">
+    <input type="hidden" name="_method" value="patch">
+
+    <% @books.each() do |book| %>
+      <div class="checkbox"
+      <label>
+          <input type="checkbox" name="book_ids[]" value="<%= book.id() %>"><%= book.title() %>
+        </label>
+      </div>
+    <% end %>
+
+     <button type="submit">Add Books</button>
+  </form>
+<% end %>
+
+<a href="/librarian">Return to Librarian Portal</a>

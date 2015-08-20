@@ -1,0 +1,12 @@
+<% if @authors.any?() %>
+  <h1>Authors</h1>
+
+<ul>
+  <% @authors.each() do |author| %>
+    <li><a href="/authors/<%= author.id %>"><%= author.first_name() %> <%= author.last_name() %></a></li>
+  <% end %>
+</ul>
+
+<%else %>
+  <p>No Authors Here :(</p>
+<% end %>
