@@ -1,0 +1,36 @@
+body {
+  background: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url('/img/bg.png') repeat center center;
+}
+
+h1 {
+  color: grey;
+}
+
+.welcome_text {
+  color: #EBD699;
+}
+
+a {
+  color: #BCAB7A
+}
+
+
+.welcome {
+  text-align: center;
+  color: white;
+  float: center;
+  background: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5));
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-top: 20%;
+  padding: 15px;
+  border-radius: 25px;
+
+}
+
+ul {
+  font-size: 14px;
+}
+.checkbox {
+  font-size: 14px;
+}

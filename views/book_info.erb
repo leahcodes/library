@@ -1,4 +1,22 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/librarian">Librarian Portal</a>
+    </div>
+    <div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Home</a></li>
+        <li><a href="/books">All Books</a></li>
+        <li><a href="/authors">All Authors</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
 <h1><%= @book.title() %></h1>
+
+<h2><i><%= @book.subject() %></i></h2>
 
 
 <% if @book.authors().any?() %>
@@ -10,11 +28,9 @@
       <li><a href="/authors/<%= author.id() %>"><%= author.first_name() %> <%= author.last_name() %></a></li>
     <% end %>
   </ul>
-<% else %>
-  <p>There are no authors yet! <a href="/authors">Add authors here</a></p>
 <% end %>
 
-<h3>Select all authors of this book:</h3>
+<h3>Select author(s) for this book:</h3>
 
 <% if @authors.any?() %>
   <form action="/books/<%= @book.id %>" method="post">
@@ -31,4 +47,25 @@
   </form>
 <% end %>
 
-<a href="/">Return to Main Page</a>
+<h4>Update Book:</h4>
+
+<form action = "/books/<%= @book.id %>/update" method="post">
+  <div class="form-group">
+  <input type="hidden" name="_method" value="patch" class="form-control">
+
+  <label for="title">Change Title:</label>
+  <input id="title" name="title" type="text" class="form-control">
+
+  <label for="subject">Change Subject:</label>
+  <input id="subject" name="subject" type="text" class="form-control">
+
+  <button type="submit" class="btn btn-info btn-block">Update</button>
+</div>
+</form>
+
+<form action = "/books/<%= @book.id %>/delete" method="post">
+  <div class="form-group">
+  <input type="hidden" name="_method" value="delete">
+  <button type="submit">Delete this book</button>
+</div>
+</form>

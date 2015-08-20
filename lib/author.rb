@@ -43,6 +43,9 @@ class Author
     @first_name = attributes.fetch(:first_name, @first_name)
     DB.exec("UPDATE authors SET first_name = '#{@first_name}' WHERE id = #{self.id()};")
 
+    @last_name = attributes.fetch(:last_name, @last_name)
+    DB.exec("UPDATE authors SET last_name = '#{@last_name}' WHERE id = #{self.id()};")
+        
     attributes.fetch(:book_ids, []).each() do |book_id|
       DB.exec("INSERT INTO authors_books (author_id, book_id) VALUES (#{self.id()}, #{book_id});")
     end

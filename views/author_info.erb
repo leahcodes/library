@@ -1,3 +1,20 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/librarian">Librarian Portal</a>
+    </div>
+    <div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Home</a></li>
+        <li><a href="/books">All Books</a></li>
+        <li><a href="/authors">All Authors</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
 <h1><%= @author.first_name()%> <%=@author.last_name() %></h1>
 
 <% if @author.books().any?() %>
@@ -21,15 +38,37 @@
     <input type="hidden" name="_method" value="patch">
 
     <% @books.each() do |book| %>
-      <div class="checkbox"
+      <div class="checkbox">
       <label>
           <input type="checkbox" name="book_ids[]" value="<%= book.id() %>"><%= book.title() %>
         </label>
       </div>
     <% end %>
 
-     <button type="submit">Add Books</button>
+     <button type="submit" class="btn btn-info btn-lg">Add Books</button>
   </form>
 <% end %>
 
-<a href="/librarian">Return to Librarian Portal</a>
+
+<h4>Update Author:</h4>
+
+<form action = "/authors/<%= @author.id %>/update" method="post">
+  <input type="hidden" name="_method" value="patch" class="form-control">
+
+  <label for="first_name">Change first name:</label>
+  <input id="first_name" name="first_name" type="text" class="form-control">
+
+  <label for="last_name">Change last name:</label>
+  <input id="last_name" name="last_name" type="text" class="form-control">
+
+  <button type="submit" class="btn btn-info btn-lg">Update</button>
+
+</form>
+<br>
+<br>
+
+<form action = "/authors/<%= @author.id %>/delete" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <button type="submit" class="btn btn-danger btn-lg">Delete this author</button>
+</form>
+</div>

@@ -71,7 +71,7 @@ patch("/authors/:id") do
   book_ids = params.fetch("book_ids")
   @author.update({:book_ids => book_ids})
   @books = Book.all()
-  erb(:author_info)
+  redirect("/authors/#{@author.id()}")
 end
 
 patch("/books/:id") do
@@ -81,4 +81,36 @@ patch("/books/:id") do
   @book.update({:author_ids => author_ids})
   @authors = Author.all()
   erb(:book_info)
+end
+
+patch("/books/:id/update") do
+  @book = Book.find(params.fetch("id").to_i())
+  title = params.fetch("title")
+  subject = params.fetch("subject")
+  @book.update({:title => title, :subject => subject})
+  @books = Book.all()
+  redirect("/books/#{@book.id()}")
+end
+
+patch("/authors/:id/update") do
+  @author = Author.find(params.fetch("id").to_i())
+  first_name = params.fetch("first_name")
+  last_name = params.fetch("last_name")
+  @author.update({:first_name => first_name, :last_name => last_name})
+  @authors = Author.all()
+  redirect("/authors/#{@author.id()}")
+end
+
+delete("/authors/:id/delete") do
+  @author = Author.find(params.fetch("id").to_i())
+  @author.delete()
+  @authors = Author.all()
+  erb(:authors)
+end
+
+delete("/books/:id/delete") do
+  @book = Book.find(params.fetch("id").to_i())
+  @book.delete()
+  @books = Book.all()
+  erb(:books)
 end
