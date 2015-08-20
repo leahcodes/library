@@ -40,9 +40,25 @@ class Author
   end
 
   define_method(:update) do |attributes|
-    @first_name = attributes.fetch(:first_name)
-    @id = self.id()
-    DB.exec("UPDATE authors SET first_name = '#{@first_name}' WHERE id = #{@id};")
+    @first_name = attributes.fetch(:first_name, @first_name)
+    DB.exec("UPDATE authors SET first_name = '#{@first_name}' WHERE id = #{self.id()};")
+
+    attributes.fetch(:book_ids, []).each() do |book_id|
+      DB.exec("INSERT INTO authors_books (author_id, book_id) VALUES (#{self.id()}, #{book_id});")
+    end
+  end
+
+  define_method(:books) do
+    authors_books = []
+    results = DB.exec("SELECT book_id FROM authors_books WHERE author_id = #{self.id()};")
+    results.each() do |result|
+      book_id = result.fetch("book_id").to_i()
+      books = DB.exec("SELECT * FROM books WHERE id = #{book_id};")
+      title = books.first().fetch("title")
+      subject = books.first().fetch("subject")
+      authors_books.push(Book.new({:id => book_id, :title => title, :subject => subject}))
+    end
+    authors_books
   end
 
   define_method(:delete) do

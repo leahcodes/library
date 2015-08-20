@@ -60,10 +60,26 @@ describe(Author) do
 
   describe('#update') do
     it('allows a user to update information in the authors table') do
-      author = Author.new({:id => nil, :first_name => "Francois", :last_name => "Gilot"})
+      book = Book.new({:id => nil, :title => "Harry Potter and the Goblet of Fire", :subject => "Fantasy"})
+      book.save()
+      author = Author.new({:id => nil, :first_name => "Joanne", :last_name => "Rowling"})
       author.save()
-      author.update({:first_name => "Frank"})
-      expect(author.first_name()).to(eq("Frank"))
+      author.update({:book_ids => [book.id()]})
+      expect(author.books()).to(eq([book]))
+    end
+  end
+
+  describe('#books') do
+    it('returns all of the books for a particular author') do
+      book1 = Book.new({:id => nil, :title => "Harry Potter and the Goblet of Fire", :subject => "Fantasy"})
+      book1.save()
+      book2 = Book.new({:id => nil, :title => "Harry Potter and the Half Blood Prince", :subject => "Fantasy"})
+      book2.save()
+      author = Author.new({:id => nil, :first_name => "Joanne", :last_name => "Rowling"})
+      author.save()
+      author.update({:book_ids => [book1.id()]})
+      author.update({:book_ids => [book2.id()]})
+      expect(author.books()).to(eq([book1, book2]))
     end
   end
 
