@@ -58,15 +58,6 @@ describe(Book) do
     end
   end
 
-  describe('#update') do
-    it('allows a user to update information in the books table') do
-      book = Book.new({:id => nil, :title => "Harry Potter and the Goblet of Fire", :subject => "Fantasy"})
-      book.save()
-      book.update({:title => "Harry Potter and the Prisoner of Azkaban"})
-      expect(book.title()).to(eq("Harry Potter and the Prisoner of Azkaban"))
-    end
-  end
-
   describe('#delete') do
     it('removes a book from the table') do
       book1 = Book.new({:id => nil, :title => "Harry Potter and the Goblet of Fire", :subject => "Fantasy"})
@@ -75,6 +66,32 @@ describe(Book) do
       book2.save()
       book2.delete()
       expect(Book.all()).to(eq([book1]))
+    end
+  end
+
+  describe('#update') do
+    it('allows a user to update information in the books table') do
+      book = Book.new({:id => nil, :title => "Harry Potter and the Goblet of Fire", :subject => "Fantasy"})
+      book.save()
+      joanne = Author.new(:id => nil, :first_name => "Joanne", :last_name => "Rowling")
+      joanne.save()
+      rita = Author.new(:id => nil, :first_name => "Rita", :last_name => "Skeeter")
+      rita.save()
+      book.update({:author_ids => [joanne.id(), rita.id()]})
+      expect(book.authors()).to(eq([joanne, rita]))
+    end
+  end
+
+  describe("#authors") do
+    it("returns all of the authors for a particular book") do
+      book = Book.new({:id => nil, :title => "Harry Potter and the Goblet of Fire", :subject => "Fantasy"})
+      book.save()
+      joanne = Author.new(:id => nil, :first_name => "Joanne", :last_name => "Rowling")
+      joanne.save()
+      rita = Author.new(:id => nil, :first_name => "Rita", :last_name => "Skeeter")
+      rita.save()
+      book.update({:author_ids => [joanne.id(), rita.id()]})
+      expect(book.authors()).to(eq([joanne, rita]))
     end
   end
 
