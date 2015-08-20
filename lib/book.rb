@@ -3,6 +3,7 @@ class Book
   attr_reader(:id, :title, :subject)
 
   define_method(:initialize) do |attributes|
+    @id = attributes.fetch(:id)
     @title = attributes.fetch(:title)
     @subject = attributes.fetch(:subject)
   end
