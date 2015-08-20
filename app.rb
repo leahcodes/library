@@ -18,8 +18,8 @@ end
 post('/books/new') do
   title = params.fetch("title")
   subject = params.fetch("subject")
-  book = Book.new({:title => title, :subject => subject})
+  book = Book.new({:id => nil, :title => title, :subject => subject})
   book.save()
-  @books = Book.all() 
+  @books = Book.all()
   erb(:books)
 end
